@@ -43,8 +43,19 @@ public class PetControllerTest {
 				//		    .andExpect(jsonPath("$", hasSize(NRO_RECORD)))
 				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
 	}
-	
 
+	@Test
+	public void testFindAllPetsType() throws Exception {
+
+		int ID_FIRST_RECORD = 1;
+		int TYPE_ID = 1;
+
+		this.mockMvc.perform(get("/pets/type/{id}", TYPE_ID))
+				.andExpect(status().isOk())
+				.andExpect(content()
+						.contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
+	}
 	/**
 	 * 
 	 * @throws Exception

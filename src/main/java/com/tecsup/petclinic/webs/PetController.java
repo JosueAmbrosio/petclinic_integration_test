@@ -65,6 +65,28 @@ public class PetController {
 
 	}
 
+	/**
+	 *
+	 * Find Pet for your type
+	 *
+	 */
+
+	@GetMapping(value = "/pets/type/{id}")
+	public ResponseEntity<List<PetTO>> findAllPetsType(@PathVariable Integer id) {
+
+		Pet petTo = null;
+
+		List<Pet> pets = petService.findByTypeId(id);
+		log.info("pets: " + pets);
+		pets.forEach(item -> log.info("Pet >>  {} ", item));
+
+		List<PetTO> petsTO = this.mapper.toPetTOList(pets);
+		log.info("petsTO: " + petsTO);
+		petsTO.forEach(item -> log.info("PetTO >>  {} ", item));
+
+		return ResponseEntity.ok(petsTO);
+
+	}
 
 	/**
 	 * Create pet
