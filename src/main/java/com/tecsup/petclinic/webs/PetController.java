@@ -2,6 +2,7 @@ package com.tecsup.petclinic.webs;
 
 import com.tecsup.petclinic.mapper.PetMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.exception.PetNotFoundException;
 import com.tecsup.petclinic.services.PetService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -87,6 +89,21 @@ public class PetController {
 		return ResponseEntity.ok(petsTO);
 
 	}
+
+	@GetMapping(value = "/pets/fecha/{date}")
+	public ResponseEntity<List<PetTO>> findAllPetsByDate(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+
+		List<Pet> pets = petService.findBybirthDate(date);
+		log.info("pets: " + pets);
+		pets.forEach(item -> log.info("Pet >>  {} ", item));
+
+		List<PetTO> petsTO = this.mapper.toPetTOList(pets);
+		log.info("petsTO: " + petsTO);
+		petsTO.forEach(item -> log.info("PetTO >>  {} ", item));
+
+		return ResponseEntity.ok(petsTO);
+	}
+
 
 	/**
 	 * Create pet

@@ -56,6 +56,18 @@ public class PetControllerTest {
 						.contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
 	}
+
+	@Test
+	public void testFindAllPetsDate() throws Exception {
+		int ID_FIRST_RECORD = 1;
+		String FECHA = "2000-09-07";
+
+		this.mockMvc.perform(get("/pets/fecha/{date}", FECHA))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
+	}
+
 	/**
 	 * 
 	 * @throws Exception

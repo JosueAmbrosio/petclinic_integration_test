@@ -1,5 +1,6 @@
 package com.tecsup.petclinic.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.tecsup.petclinic.entities.Pet;
@@ -60,6 +61,13 @@ public interface PetService {
 	 * @return
 	 */
 	List<Pet> findByOwnerId(int ownerId);
+
+	/**
+	 *
+	 * @param fecha
+	 * @return
+	 */
+	List<Pet> findBybirthDate(Date fecha);
 
 	/**
 	 *

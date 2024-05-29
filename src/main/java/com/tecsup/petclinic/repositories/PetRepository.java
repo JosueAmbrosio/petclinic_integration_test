@@ -1,5 +1,6 @@
 package com.tecsup.petclinic.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,6 +26,9 @@ public interface PetRepository
 
 	// Fetch pets by ownerId
 	List<Pet> findByOwnerId(int ownerId);
+
+	// Fetch pets by fecha
+	List<Pet> findBybirthDate(Date fecha);
 
 	// Fetch pets by Id
 

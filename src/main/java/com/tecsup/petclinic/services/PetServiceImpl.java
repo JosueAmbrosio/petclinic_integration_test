@@ -1,5 +1,6 @@
 package com.tecsup.petclinic.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,6 +117,21 @@ public class PetServiceImpl implements PetService {
 	public List<Pet> findByOwnerId(int ownerId) {
 
 		List<Pet> pets = petRepository.findByOwnerId(ownerId);
+
+		pets.stream().forEach(pet -> log.info("" + pet));
+
+		return pets;
+	}
+
+	/**
+	 *
+	 * @param fecha
+	 * @return
+	 */
+	@Override
+	public List<Pet> findBybirthDate(Date fecha) {
+
+		List<Pet> pets = petRepository.findBybirthDate(fecha);
 
 		pets.stream().forEach(pet -> log.info("" + pet));
 
