@@ -104,7 +104,26 @@ public class PetController {
 		return ResponseEntity.ok(petsTO);
 	}
 
+	/**
+	 *
+	 * Find Pet By Owner
+	 *
+	 */
 
+	 @GetMapping(value = "/pets/owner/{id}")
+	 public ResponseEntity<List<PetTO>> findAllPetsByOwner(@PathVariable Integer id) {
+ 
+		 List<Pet> pets = petService.findByOwnerId(id);
+		 log.info("Encontrando pets por el id {}: {}", id, pets);
+		 pets.forEach(item -> log.info("Pet >> {}", item));
+ 
+		 List<PetTO> petsTO = this.mapper.toPetTOList(pets);
+		 log.info("petsTO: " + petsTO);
+		 petsTO.forEach(item -> log.info("PetTO >>  {} ", item));
+ 
+		 return ResponseEntity.ok(petsTO);
+	 }
+	 
 	/**
 	 * Create pet
 	 *
