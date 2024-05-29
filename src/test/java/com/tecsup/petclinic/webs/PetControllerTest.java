@@ -82,7 +82,17 @@ public class PetControllerTest {
 				.andExpect(jsonPath("$[0].id", is(EXPECTED_FIRST_ID)))
 				.andExpect(jsonPath("$[1].id", is(EXPECTED_SECOND_ID)));
 	}
-	
+
+	@Test
+	public void testFindAllPetsName() throws Exception {
+		final int ID_FIRST_RECORD = 1;
+		final String PET_NAME = "Leo";
+
+		this.mockMvc.perform(get("/pets/name/{name}", PET_NAME))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
+	}
 	/**
 	 * 
 	 * @throws Exception

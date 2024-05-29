@@ -123,7 +123,20 @@ public class PetController {
  
 		 return ResponseEntity.ok(petsTO);
 	 }
-	 
+
+	/**
+	 *
+	 * Find Pet By Name
+	 *
+	 */
+
+	@GetMapping(value = "/pets/name/{name}")
+	public ResponseEntity<List<PetTO>> findAllPetsName(@PathVariable("name") String name) {
+		List<Pet> pets = petService.findByName(name);
+		List<PetTO> petsTO = this.mapper.toPetTOList(pets);
+		return ResponseEntity.ok(petsTO);
+	}
+
 	/**
 	 * Create pet
 	 *
